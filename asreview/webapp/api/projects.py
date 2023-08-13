@@ -235,11 +235,11 @@ def api_init_project():  # noqa: F401
         project_name=project_title,
         project_description=project_description,
         project_authors=project_authors,
-        project_label_groups=[
+        project_tags=[
             {
                 "name": "Biomes",
                 "id": "biomes",
-                "labels": [
+                "values": [
                     {"id": "boreal_forest", "name": "Boreal Forest"},
                     {"id": "savanna", "name": "Savanna"},
                     {"id": "mangrove", "name": "Mangrove"},
@@ -250,7 +250,7 @@ def api_init_project():  # noqa: F401
             {
                 "name": "Restoration Approaches",
                 "id": "restoration_approaches",
-                "labels": [
+                "values": [
                     {"id": "direct_seeding", "name": "Direct seeding (i.e. spreading/planting seeds)"},
                     {"id": "tree_planting", "name": "Planting trees (i.e. planting trees as seedlings)"},
                     {
@@ -264,7 +264,7 @@ def api_init_project():  # noqa: F401
             {
                 "name": "Recovery Data",
                 "id": "recovery_data",
-                "labels": [
+                "values": [
                     {"id": "measured_carbon", "name": "Measured carbon (or biomass)"},
                     {
                         "id": "diversity_of_plant_species_naturally_recruiting",
