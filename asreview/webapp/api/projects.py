@@ -71,6 +71,7 @@ from asreview.state.errors import StateError
 from asreview.state.errors import StateNotFoundError
 from asreview.state.sql_converter import upgrade_asreview_project_file
 from asreview.state.sql_converter import upgrade_project_config
+from asreview.state.custom_metadata_mapper import extract_tags
 from asreview.utils import _get_executable
 from asreview.utils import asreview_path
 from asreview.utils import list_reader_names
@@ -669,7 +670,7 @@ def api_get_labeled(project):  # noqa: F401
     latest_first = request.args.get("latest_first", default=1, type=int)
 
     with open_state(project.project_path) as s:
-        data = s.get_dataset(["record_id", "label", "query_strategy", "notes"])
+        data = s.get_dataset(["record_id", "label", "query_strategy", "notes", "custom_metadata_json"])
         data["prior"] = (data["query_strategy"] == "prior").astype(int)
 
     if any(s in subset for s in ["relevant", "included"]):
@@ -750,6 +751,7 @@ def api_get_labeled(project):  # noqa: F401
                 "url": record.url,
                 "included": int(data.loc[i, "label"]),
                 "note": data.loc[i, "notes"],
+                "tags": extract_tags(data.loc[i, "custom_metadata_json"]),
                 "prior": int(data.loc[i, "prior"]),
             }
         )
